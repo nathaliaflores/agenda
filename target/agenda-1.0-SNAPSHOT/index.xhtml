@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <p:outputLabel value="Ingrese Categoria"/>
+            <p:inputText value="#{categoriaController.categoria.nombre}"/>
+            <p:commandButton value="Enviar" actionListener="#{categoriaController.insertar()}"/>
+            <p:commandButton value="listar" actionListener="#{categoriaController.listar()}" update=":tabla"/>
+
+        </h:form>
+        <br></br>
+        <p:dataTable id="tabla" value="#{categoriaController.lista}" var="ver">
+            <p:column  headerText="idCategoria">
+                <p:outputLabel value="#{ver.idCategoria}"></p:outputLabel>
+            </p:column>
+            <p:column headerText="nombre">
+                <p:outputLabel value="#{ver.nombre}"></p:outputLabel>
+            </p:column>
+            <p:column headerText="Modificar">
+                <p:commandLink value="Modificar" actionListener="#{categoriaController.leerid(ver)}" update=":dialogo" oncomplete="PF('w').show();"></p:commandLink>
+            </p:column>
+            <p:column headerText="Eliminar">
+                <p:commandLink value="Eliminar" actionListener="#{categoriaController.eliminar(ver)}" update="tabla"></p:commandLink>
+            </p:column>
+        </p:dataTable>
+         <p:dialog id="dialogo" widgetVar="w" header="Datos" >
+            <h:form>
+                <p:outputLabel value="idCategoria"></p:outputLabel>
+                <p:inputText value="#{categoriaController.categoria.idCategoria}"></p:inputText>
+                <p:outputLabel value="nombre"></p:outputLabel>
+                <p:inputText value="#{categoriaController.categoria.nombre}"></p:inputText>
+                <p:commandButton value="Modificar" actionListener="#{categoriaController.modificar()}"/>
+                <p:commandButton value="Cancelar" oncomplete="PF('w').hide();" immediate="true" update=":tabla"/>
+            </h:form>
+        </p:dialog>
+
+    </h:body>
+
+</html>
+

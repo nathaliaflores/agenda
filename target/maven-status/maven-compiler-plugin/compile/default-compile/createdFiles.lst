@@ -1,0 +1,12 @@
+entity\Nota.class
+entity\Categoria.class
+entity\Persona_.class
+controller\CategoriaController.class
+ejb\CategoriaFacadeLocal.class
+entity\Usuario.class
+entity\Usuario_.class
+entity\Categoria_.class
+entity\Nota_.class
+ejb\AbstractFacade.class
+entity\Persona.class
+ejb\CategoriaFacade.class

@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <p:outputLabel value="Ingrese nombre"/>
+            <p:inputText  value="#{personaController.persona.nombre}"/><br/><br/>
+            <p:outputLabel value="Ingrese Apellido"/>
+            <p:inputText value="#{personaController.persona.apellido}"/><br/><br/>
+            <p:outputLabel value="Ingrese Email"/>
+            <p:inputText value="#{personaController.persona.email}"/><br/><br/>
+            <p:outputLabel value="Ingrese Telefono"/>
+            <p:inputText value="#{personaController.persona.telefono}"/><br/><br/>
+            <p:commandButton value="Enviar" actionListener="#{personaController.insertar()}"/>
+            <p:commandButton value="Listar" actionListener="#{personaController.listar()}" update=":tabla"/>
+        </h:form>
+        <br/><br/><br/><br/>
+        <p:dataTable id="tabla" value="#{personaController.lista}" var="ver">
+            <p:column headerText="idPersona">
+                <p:outputLabel value="#{ver.idPersona}"></p:outputLabel>
+            </p:column>
+            <p:column headerText="nombre">
+                <p:outputLabel value="#{ver.nombre}"></p:outputLabel>
+            </p:column>
+            <p:column headerText="apellido">
+                <p:outputLabel value="#{ver.apellido}"></p:outputLabel>
+            </p:column>
+            <p:column headerText="email">
+                <p:outputLabel value="#{ver.email}"></p:outputLabel>
+            </p:column>
+            <p:column headerText="telefono">
+                <p:outputLabel value="#{ver.telefono}"></p:outputLabel>
+            </p:column>
+            <p:column headerText="Modificar">
+                <p:commandLink value="Modificar" actionListener="#{personaController.leerid(ver)}" update=":dialogo" oncomplete="PF('w').show();"></p:commandLink>
+            </p:column>
+            <p:column headerText="Eliminar">
+                <p:commandLink value="Eliminar" actionListener="#{personaController.eliminar(ver)}" update="tabla" ></p:commandLink>
+            </p:column>
+        </p:dataTable>
+        
+        <p:dialog id="dialogo" widgetVar="w" header="Datos">
+            <h:form>
+                <h:panelGrid>
+                <p:outputLabel value="idPersona"></p:outputLabel>
+                <p:inputText value="#{personaController.persona.idPersona}"></p:inputText>
+                <p:outputLabel value="nombre"></p:outputLabel>
+                <p:inputText value="#{personaController.persona.nombre}"></p:inputText>
+                <p:outputLabel value="apellido"></p:outputLabel>
+                <p:inputText value="#{personaController.persona.apellido}"></p:inputText>
+                <p:outputLabel value="email"></p:outputLabel>
+                <p:inputText value="#{personaController.persona.email}"></p:inputText>
+                <p:outputLabel  value="telefono"></p:outputLabel>
+                <p:inputText value="#{personaController.persona.telefono}"></p:inputText>
+                </h:panelGrid>
+                <p:commandButton value="Modificar" actionListener="#{personaController.modificar()}"/>
+                <p:commandButton value="Cancelar" oncomplete="PF('w').hide();" immediate="true" update=":tabla"/>
+            </h:form>
+            
+        </p:dialog>
+    </h:body>
+</html>
+
